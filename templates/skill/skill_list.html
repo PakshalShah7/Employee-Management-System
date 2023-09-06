@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-success" href="{% url 'task1:skill_create' %}">Create</a>
+{% if skills %}
+<table class="table table-hover">
+    <thead class="bg-light">
+    <tr>
+        <th>ID</th>
+        <th>Skill Name</th>
+        <th></th>
+    </tr>
+    </thead>
+    {% for skill in skills %}
+    <tbody>
+    <tr>
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="ms-3">
+                    <p class="fw-bold mb-1">{{ skill.id }}</p>
+                </div>
+            </div>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">{{ skill.skill_name }}</p>
+        </td>
+        <td>
+            <a class="btn btn-outline-info" href="{% url 'task1:skill_update' skill.id %}">Edit</a>
+            <a class="btn btn-outline-danger" href="{% url 'task1:skill_delete' skill.id %}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+{% else %}
+<small>No result found</small>
+{% endif %}
+{% endblock content %}

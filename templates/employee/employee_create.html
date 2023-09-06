@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="col d-flex justify-content-center">
+    <form method="POST" id="create_form">
+        {% csrf_token %}
+        {% for error in form.non_field_errors %}
+        <ul>
+            <li>{{ error }}</li>
+        </ul>
+        {% endfor %}
+        {{ form.as_p }}
+        <b>Skills:</b>
+        {{ formset.management_form }}
+        {% for formset_form in formset %}
+        <div class="table align-middle mb-0 bg-white" id="employee-form">
+            <div class="col">
+                {% for field in formset_form %}
+                <p class="list-group-item list-group-item-danger text-danger">{{ field.errors }}</p>
+                {% endfor %}
+                <div class="d-flex align-items-center">
+                    {{ formset_form.as_p }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <button class="btn btn-success" id="add_more">Add</button>
+        <button type="submit" class="btn btn-primary" id="save_form">Create</button>
+    </form>
+</div>
+<script src="{% static 'js/employee_create.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table mb-0 bg-white">
+    <tr>
+        <th>Employee ID:</th>
+        <td><p>{{ employee.id }}</p></td>
+    </tr>
+    <tr>
+        <th>Employee name:</th>
+        <td><p>{{ employee.employee_name }}</p></td>
+    </tr>
+    <tr>
+        <th>Reporting Manager:</th>
+        <td><p>{{ employee.reporting_manager }}</p></td>
+    </tr>
+</table>
+<table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+    <tr>
+        <th>Skill</th>
+        <th>Description</th>
+        <th>Rating</th>
+    </tr>
+    </thead>
+
+    {% for employee in employee.employees.all %}
+    <tbody>
+    <tr>
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="ms-3">
+                    <p class="fw-bold mb-1">{{ employee.skill }}</p>
+                </div>
+            </div>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">{{ employee.description|truncatechars:20 }}</p>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">{{ employee.rating }}</p>
+        </td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+{% endblock content %}
